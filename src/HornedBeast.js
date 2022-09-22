@@ -8,33 +8,40 @@ class HornedBeast extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            description: this.props.description, 
+           _id: this.props._id,
+            title: this.props.title,
+            description: this.props.description,
+            keyword: this.props.keyword,
+            horns: this.props.horns,
             src: this.props.src,
+            votes: '',
         }
     }
 
     handleClick = () => {
-        this.setState({ description: this.state.description + " ❤️" });
+        this.setState({ votes: this.state.votes + '❤️' });
     }
 
     render() {
         return (
             <>
-            {/* <Card style={{ width: "30rem" }} className="mx-auto my-5"> */}
-                <Card border="dark" style={{ width: "30rem" }} className="mx-auto my-5">
-                <Card.Img variant="top" src={this.props.src} alt={this.props.description} />
-                <Card.Body>
-                    <Card.Title>{this.props.title}</Card.Title>
-                    <Card.Text>
-                        {this.state.description}
-                    </Card.Text>
-                    <Button variant="primary" onClick={this.handleClick}>Heart!</Button>
-                </Card.Body>
-            </Card>
+                <Card style={{ width: '18rem' }} className="h-100 mx-auto px-1">
+                    <Card.Img className="py-4 h-180 w-285 m-auto" variant="top" src={this.state.src} alt={this.state.keyword} title={this.state.title} />
+                    <Card.Body className="py-auto">
+                        <Card.Title>{this.state.title}</Card.Title>
+                        <Card.Text>{this.state.description}</Card.Text>
+                        <Card.Text>Horns: {this.state.horns}</Card.Text>
+                        <Card.Text>Favorites: {this.state.votes}</Card.Text>
+                        <Button className="mb-3" variant="primary" onClick={this.handleClick}>Heart</Button>
+                    </Card.Body>
+                </Card>
             </>
-        )
+        );
     }
 }
+
+
+
 
 
 
