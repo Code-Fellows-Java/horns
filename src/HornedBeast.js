@@ -26,7 +26,9 @@ class HornedBeast extends React.Component {
         return (
             <>
                 <Card style={{ width: '18rem' }} className="h-100 mx-auto px-1">
-                    <Card.Img className="py-4 h-180 w-285 m-auto" variant="top" src={this.state.src} alt={this.state.keyword} title={this.state.title} />
+                    <Card.Img className="py-4 h-180 w-285 m-auto" variant="top" src={this.state.src} alt={this.state.keyword} title={this.state.title} onClick={
+                        this.props.setBeast
+                    } />
                     <Card.Body className="py-auto">
                         <Card.Title>{this.state.title}</Card.Title>
                         <Card.Text>{this.state.description}</Card.Text>
