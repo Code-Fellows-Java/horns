@@ -5,6 +5,7 @@ import Footer from './Footer.js';
 import Button from 'react-bootstrap/Button';
 import HornedBeastForm from './HornedBeastForm.js';
 import Modal from 'react-bootstrap/Modal';
+import data from './assets/data.json';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
@@ -14,6 +15,7 @@ class App extends React.Component {
     this.state = {
       showModal: false,
       selectedHornedBeast: {},
+      beastArr: data,
     }
   }
 
@@ -30,26 +32,20 @@ class App extends React.Component {
     this.setState({ showModal: false });
   }
 
-handleFormSubmit = (event) => {
-    event.preventDefault();
-    let horns = event.target.horns.value;
-    this.props.filterBeasts(horns);
-}
-
-
-
-
-
-
-
+  filterBeast = (e) => {
+    let hornedNum = parseInt(e.target.value)
+    let filterArr = data.filter(b => hornedNum === b.horns)
+    this.setState({ beastArr: filterArr })
+  }
 
   render() {
     return (
       <>
-      <HornedBeastForm />
+        <HornedBeastForm filterBeast={this.filterBeast} />
         <Header />
         <Main
           setBeast={this.setBeast}
+          beastHorns={this.state.beastArr}
         />
         <Footer />
         <HornedBeastModal showModal={this.state.showModal} setShowModalFalse={this.setShowModalFalse} selectedHornedBeast={this.state.selectedHornedBeast} />
@@ -57,7 +53,6 @@ handleFormSubmit = (event) => {
     )
   }
 }
-
 
 class HornedBeastModal extends React.Component {
   render() {
@@ -68,7 +63,7 @@ class HornedBeastModal extends React.Component {
             <Modal.Title>{this.props.selectedHornedBeast.title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <img style={{width: '100%'}} variant="top" src={this.props.selectedHornedBeast.image_url} alt={this.props.selectedHornedBeast.title}>
+            <img style={{ width: '100%' }} variant="top" src={this.props.selectedHornedBeast.image_url} alt={this.props.selectedHornedBeast.title}>
             </img>
             <p>
               {this.props.selectedHornedBeast.description}
