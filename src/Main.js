@@ -19,6 +19,10 @@ class Main extends React.Component {
               return (
                 <Col>
                   <HornedBeast
+                  setBeast = {
+                    () => this.props.setBeast(item)
+
+                  }
                     key={item._id}
                     title={item.title}
                     src={item.image_url}
